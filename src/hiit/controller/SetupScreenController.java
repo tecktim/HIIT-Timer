@@ -2,6 +2,8 @@ package hiit.controller;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.sun.prism.paint.Color;
+
 import hiit.Exercise;
 import hiit.model.Model;
 import hiit.view.SetupScreenView;
@@ -12,12 +14,17 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.stage.Stage;
 
 public class SetupScreenController implements Observer {
 
-	private SetupScreenView view;
 	private Stage primaryStage;
 	private Model model;
 	
@@ -25,7 +32,7 @@ public class SetupScreenController implements Observer {
 		this.model = model;
 		this.primaryStage = primaryStage;
 	}
-
+	
 	public void onClickStart(ActionEvent e) {
 		StartScreenController startScreenController = new StartScreenController(this.primaryStage, this.model);
 		StartScreenView startScreenView = new StartScreenView(this.primaryStage, this.model, startScreenController);
@@ -33,7 +40,13 @@ public class SetupScreenController implements Observer {
 		startScreenView.show();
 	}
 	
-	public void onClickWorkout(ActionEvent e) {
+	public void onClickWorkout(ActionEvent e, ComboBox<Integer> pauseCombo) {
+		if (pauseCombo.getSelectionModel().getSelectedItem() == null) {	
+			pauseCombo.setPromptText("HIER WAS EINGEBEN AMK");
+			return;
+		}else {
+			this.model.setPauseTime(pauseCombo.getSelectionModel().getSelectedItem());
+		}
 		WorkoutScreenController workoutScreenController = new WorkoutScreenController(this.primaryStage, this.model);
 		WorkoutScreenView workoutScreenView = new WorkoutScreenView(this.primaryStage, this.model, workoutScreenController);
 		

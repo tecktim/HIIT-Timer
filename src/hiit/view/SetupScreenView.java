@@ -40,6 +40,8 @@ public class SetupScreenView implements Observer {
 		this.controller = controller;
 		this.primaryStage = primaryStage;
 		
+		this.model.addEntry("asd", "12", "12");
+		
 		final Label setupScreenTitleLabel = new Label("Setup yous Workout");
 		final TextField exerciseNameInput = new TextField();
 		final Label exerciseNameLabel = new Label("Setup yous Exercises");
@@ -50,18 +52,19 @@ public class SetupScreenView implements Observer {
 		final Button buttonGoToStartScreen = new Button("StartScreen");
 		final Button buttonGoToWorkoutScreen = new Button("WorkoutScreen");
 		final Button exerciseRemoveButton = new Button("Remove");
-		final ComboBox<String> pauseCombo = new ComboBox<>(model.pauseOptions);
-		pauseCombo.setPromptText("Pause Time");
+		final ComboBox<Integer> pauseCombo = new ComboBox<>(model.pauseOptions);
+		pauseCombo.setPromptText("Pause (in seconds)");
 		
 		ListView<String> setupListView = new ListView<>(model.stringEntries);
 		SelectionModel<String> selectionModel = setupListView.getSelectionModel();
 		
 		
 		buttonGoToStartScreen.setOnAction(e -> controller.onClickStart(e));
-		buttonGoToWorkoutScreen.setOnAction(e -> controller.onClickWorkout(e));
+		buttonGoToWorkoutScreen.setOnAction(e -> controller.onClickWorkout((e), pauseCombo));
 		
 		exerciseAddButton.setOnAction(e -> controller.onClickAddExercise(e, exerciseNameInput.getText(), exerciseSetsInput.getText(), exerciseRepsInput.getText()));
 		exerciseRemoveButton.setOnAction(e -> controller.onClickRemoveExercise(e, selectionModel.getSelectedIndex()));
+		
 		
 		BooleanBinding nameValid = exerciseNameInput.textProperty()
 				.isNotEmpty()
