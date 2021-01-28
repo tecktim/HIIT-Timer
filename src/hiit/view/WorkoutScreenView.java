@@ -3,110 +3,110 @@ package hiit.view;
 import java.util.Observable;
 import java.util.Observer;
 
-import hiit.Exercise;
+import hiit.CustomButton;
 import hiit.controller.WorkoutScreenController;
 import hiit.model.Model;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.SelectionModel;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+@SuppressWarnings("deprecation")
 public class WorkoutScreenView implements Observer {
+	private final double WIDTH = 900;
+	private final double HEIGHT = 900;
+	private final int COLUMN_COUNT = 9;
+	private final int ROW_COUNT = 9;
+
 	private Model model;
 	private WorkoutScreenController controller;
 	private Scene scene;
 	private Stage primaryStage;
-	
+
 	public WorkoutScreenView(Stage primaryStage, Model model, WorkoutScreenController controller) {
 		this.model = model;
 		this.controller = controller;
 		this.primaryStage = primaryStage;
-	
-		final GridPane WorkoutPane = new GridPane();
-		WorkoutPane.setGridLinesVisible(true);
-		
-		
-		final Label WorkoutScreenTitleLabel = new Label("Complete your Workout");
-		final Button ButtonGoToSetupScreen = new Button("SetupScreen");
-		final Button ButtonEnd = new Button("Exit");
-		final Label WorkoutTimer = new Label("");
-		final Button TimerPlay = new Button("Play Timer");
-		final Button TimerPause = new Button("Pause Timer");
+
+		final GridPane gridPane = new GridPane();
+
+		final Label workoutScreenTitleLabel = new Label("Complete your workout");
+		final CustomButton buttonGoToSetupScreen = new CustomButton("Setup");
+		final CustomButton buttonEnd = new CustomButton("Quit");
+		final CustomButton timerPlay = new CustomButton("Set done");
+		final CustomButton timerPause = new CustomButton("Pause");
 		final ProgressIndicator pauseIndicator = new ProgressIndicator();
+		pauseIndicator.setMaxHeight(120);
+		pauseIndicator.setMaxWidth(120);
+		pauseIndicator.setMinHeight(120);
+		pauseIndicator.setMinWidth(120);
+		pauseIndicator.setPrefHeight(120);
+		pauseIndicator.setPrefWidth(120);
+
 		pauseIndicator.setVisible(false);
-		
-		
-		ButtonEnd.setOnAction(e -> this.controller.onClickExit(e));		
-		
-		ButtonGoToSetupScreen.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				controller.onClickSetup(e);
-				model.setPauseStop(true);
-			}
-		});
+		timerPause.setDisable(true);
 
-		TimerPlay.setOnAction(e -> this.controller.onClickStartTimerAction((e), pauseIndicator, TimerPlay));
-		/*WorkoutPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent event) {
-				if(event.getCode() == KeyCode.SPACE) {
-					controller.onClickStartTimerKey((event), pauseIndicator);
-				}
-			}
-		});*/
-		TimerPause.setOnAction(e -> this.model.setPauseStop(true));		
-		ListView<String> WorkoutListView = new ListView<String>(model.stringEntries);
-		
-		
-		for (int i = 0; i < 5; i++) {
-	        ColumnConstraints column = new ColumnConstraints(WorkoutPane.getMaxWidth()/3, WorkoutPane.getMaxWidth()/3, Double.MAX_VALUE);
-	        column.setHgrow(Priority.ALWAYS);
-	        column.setHalignment(HPos.CENTER);
-	        WorkoutPane.getColumnConstraints().add(column);
-	    }
-		RowConstraints WorkoutPaneRow1 = new RowConstraints(100, 100, Double.MAX_VALUE);
-		RowConstraints WorkoutPaneRow2 = new RowConstraints(100, 100, Double.MAX_VALUE);
-		RowConstraints WorkoutPaneRow3 = new RowConstraints(100, 100, Double.MAX_VALUE);
-		RowConstraints WorkoutPaneRow4 = new RowConstraints(400, 100, Double.MAX_VALUE);
-		RowConstraints WorkoutPaneRow5 = new RowConstraints(100, 100, Double.MAX_VALUE);
-		WorkoutPane.getRowConstraints().addAll(WorkoutPaneRow1, WorkoutPaneRow2, WorkoutPaneRow3, WorkoutPaneRow4, WorkoutPaneRow5);
+		workoutScreenTitleLabel.getStyleClass().add("title-label");
 
-		WorkoutPane.add(WorkoutScreenTitleLabel, 2, 0);
-		WorkoutPane.add(ButtonGoToSetupScreen, 0, 4);
-		WorkoutPane.add(ButtonEnd, 4, 4);
-		WorkoutPane.add(WorkoutListView, 0, 2, 4, 2);
-		WorkoutPane.add(pauseIndicator, 1, 1);
-		WorkoutPane.add(TimerPlay, 2, 1);
-		WorkoutPane.add(TimerPause, 3, 1);
-		
+		buttonEnd.setOnAction(e -> this.controller.onClickExit(e));
+
+		buttonGoToSetupScreen.setOnAction(e -> this.controller.onClickSetup(e));
+		buttonGoToSetupScreen.disableProperty().bind(this.model.workoutDoneProperty().not());
+
+		timerPlay.setOnAction(e -> this.controller.onClickStartTimerAction((e), pauseIndicator, timerPlay, timerPause));
+		/*
+		 * gridPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
+		 * 
+		 * @Override public void handle(KeyEvent event) { if(event.getCode() ==
+		 * KeyCode.SPACE) { controller.onClickStartTimerKey((event), pauseIndicator); }
+		 * } });
+		 */
+		timerPause.setOnAction(e -> this.controller.onClickPauseTimerAction(e));
+		ListView<String> workoutListView = new ListView<String>(model.stringEntries);
+		workoutListView.getStyleClass().add("custom-list-view");
+		double colWidth = WIDTH / 9;
+		for (int i = 0; i < 9; i++) {
+			ColumnConstraints column = new ColumnConstraints(colWidth, colWidth, colWidth);
+			column.setHalignment(HPos.CENTER);
+			gridPane.getColumnConstraints().add(column);
+		}
+
+		double rowHeight = HEIGHT / 9;
+		for (int i = 0; i < 9; i++) {
+			RowConstraints row = new RowConstraints(rowHeight, rowHeight, rowHeight);
+			gridPane.getRowConstraints().add(row);
+		}
+
+		gridPane.add(workoutScreenTitleLabel, 0, 0, 9, 1);
+		gridPane.add(workoutListView, 0, 2, COLUMN_COUNT - 2, 5);
+		gridPane.add(pauseIndicator, COLUMN_COUNT - 2, 5, 2, 2);
+		gridPane.add(timerPlay, COLUMN_COUNT - 2, 2, 2, 1);
+		gridPane.add(timerPause, COLUMN_COUNT - 2, 3, 2, 1);
+
+		gridPane.add(buttonGoToSetupScreen, 0, ROW_COUNT - 1, 3, 1);
+		gridPane.add(buttonEnd, COLUMN_COUNT - 3, ROW_COUNT - 1, 3, 1);
+		gridPane.getStyleClass().add("grid-pane");
+
 		VBox layoutWorkout = new VBox();
-		layoutWorkout.getChildren().addAll(WorkoutPane);
-		scene = new Scene(layoutWorkout, 600, 800);
+		layoutWorkout.getChildren().addAll(gridPane);
+		scene = new Scene(layoutWorkout, WIDTH, HEIGHT);
+		scene.getStylesheets().add("css/style.css");
 		this.primaryStage.setScene(scene);
+
 	}
-	
-	public void show()
-	{
+
+	public void show() {
 		this.primaryStage.show();
 	}
-	
+
 	@Override
 	public void update(Observable o, Object arg) {
-		
+
 	}
 }

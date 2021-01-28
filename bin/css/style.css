@@ -1,0 +1,182 @@
+// https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html
+
+* {
+	-fx-hiit-background: white;
+	
+	// ProgressIndicator
+	-fx-hiit-progress: #21a179;
+	
+	// Button
+	-fx-hiit-action: #5d5e59;
+	-fx-hiit-action-text: white;
+	
+	// Hover
+	-fx-hiit-hover: #21a179;
+	-fx-hiit-hover-text: white;
+	
+	// Focus
+	-fx-hiit-focused: #21a179;
+	-fx-hiit-focused-text: white;
+	
+	// Fehler
+	-fx-hiit-error: #fe5f55;
+	-fx-hiit-error-text: white;
+
+	
+	/** Focus border change**/
+	-fx-focus-color: -fx-hiit-focused;
+	-fx-faint-focus-color: -fx-hiit-background;
+}
+
+.button {
+	-fx-font-size: 18px;
+	-fx-background-color: -fx-hiit-action;
+	-fx-text-fill: -fx-hiit-action-text;
+	-fx-font-weight: bold;
+}
+
+.button:hover {
+	-fx-background-color: -fx-hiit-hover;
+	-fx-text-fill: -fx-hiit-hover-text;
+}
+
+
+.text-field{
+	-fx-height: 50px;
+	-fx-font-size: 18px;
+}
+
+.text-field:focused{
+	-fx-border-color: -fx-hiit-focused;
+}
+
+
+
+.custom-list-view:focused{
+	-fx-border-color: -fx-hiit-background;
+}
+
+.custom-list-view .list-cell {
+	-fx-cell-size: 50px;
+	-fx-font-size: 18px;
+	-fx-background-color: -fx-hiit-background;
+	}
+	
+.custom-list-view .list-cell:focused {
+	-fx-background-color: -fx-hiit-focused;
+	-fx-text-fill: -fx-hiit-focused-text;
+	-fx-border-color: -fx-hiit-background;
+	-fx-font-weight: bold;
+	}
+	
+.guide-label
+{
+	-fx-font-size: 18px;
+}
+
+.title-label
+{
+	-fx-font-size: 26px;
+	-fx-text-fill: -fx-hiit-hover;
+	-fx-font-weight: bold;
+}
+
+.field-label
+{
+	-fx-font-size: 18px;
+}
+
+.progress-indicator .percentage
+{
+	-fx-font-size: 20px;
+}
+
+.progress-indicator .progress
+{
+	-fx-background-color: -fx-hiit-progress;
+}
+
+.grid-pane{
+	-fx-background-color: -fx-hiit-background;
+}
+
+.custom-combo-box{
+	-fx-background-color: -fx-hiit-action;
+	-fx-text-fill: -fx-hiit-action-text;
+	-fx-border-color: -fx-hiit-action;
+}
+
+.custom-combo-box:hover{
+	-fx-background-color: -fx-hiit-hover;
+	-fx-text-fill: -fx-hiit-hover-text;
+	-fx-border-color: -fx-hiit-hover;
+}
+
+.custom-combo-box:focused{
+	-fx-background-color: -fx-hiit-focused;
+	-fx-text-fill: -fx-hiit-focused-text;
+	-fx-border-color: -fx-hiit-focused;
+}
+
+.custom-combo-box .list-cell{
+    -fx-cell-size: 50px;
+	-fx-font-size: 18px;
+	-fx-background-color: -fx-hiit-action;
+	-fx-text-fill: -fx-hiit-action-text;
+	-fx-border-color: -fx-hiit-action;
+	-fx-font-weight: bold;
+}
+
+.custom-combo-box .list-cell:hover{
+	-fx-background-color: -fx-hiit-hover;
+	-fx-text-fill: -fx-hiit-hover-text;
+	-fx-border-color: -fx-hiit-hover;
+}
+
+.custom-combo-box .list-cell:focused{
+	-fx-background-color: -fx-hiit-focused;
+	-fx-text-fill: -fx-hiit-focused-text;
+	-fx-border-color: -fx-hiit-focused;
+}
+
+// error combobox
+
+
+.pause-combo-error{
+	-fx-background-color: -fx-hiit-error;
+	-fx-text-fill: -fx-hiit-error-text;
+	-fx-border-color: -fx-hiit-error;
+}
+
+.pause-combo-error:hover{
+	-fx-background-color: -fx-hiit-hover;
+	-fx-text-fill: -fx-hiit-hover-text;
+	-fx-border-color: -fx-hiit-hover;
+}
+
+.pause-combo-error:focused{
+	-fx-background-color: -fx-hiit-focused;
+	-fx-text-fill: -fx-hiit-focused-text;
+	-fx-border-color: -fx-hiit-focused;
+}
+
+.pause-combo-error .list-cell{
+    -fx-cell-size: 50px;
+	-fx-font-size: 18px;
+	-fx-background-color: -fx-hiit-error;
+	-fx-text-fill: -fx-hiit-error-text;
+	-fx-border-color: -fx-hiit-error;
+	-fx-font-weight: bold;
+}
+
+.pause-combo-error .list-cell:hover{
+	-fx-background-color: -fx-hiit-hover;
+	-fx-text-fill: -fx-hiit-hover-text;
+	-fx-border-color: -fx-hiit-hover;
+}
+
+.pause-combo-error .list-cell:focused{
+	-fx-background-color: -fx-hiit-focused;
+	-fx-text-fill: -fx-hiit-focused-text;
+	-fx-border-color: -fx-hiit-focused;
+}
