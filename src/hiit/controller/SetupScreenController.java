@@ -24,7 +24,7 @@ public class SetupScreenController implements Observer {
 		this.primaryStage = primaryStage;
 	}
 
-	// Handling start button
+	// start button
 	public void onClickStart(ActionEvent e) {
 		StartScreenController startScreenController = new StartScreenController(this.primaryStage, this.model);
 		StartScreenView startScreenView = new StartScreenView(this.primaryStage, this.model, startScreenController);
@@ -32,7 +32,7 @@ public class SetupScreenController implements Observer {
 		startScreenView.show();
 	}
 
-	// Handling workout button
+	// workout button
 	public void onClickWorkout(ActionEvent e, ComboBox<Integer> pauseCombo) {
 		// Handling the pauseCombo display via css for when there is no pause selected
 		if (pauseCombo.getSelectionModel().getSelectedItem() == null) {

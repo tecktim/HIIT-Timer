@@ -62,7 +62,7 @@ public class SetupScreenView implements Observer {
 		SelectionModel<String> selectionModel = setupListView.getSelectionModel();
 		setupListView.getStyleClass().add("custom-list-view");
 
-		// Adding css controllers
+		// Adding css classes
 		setupListView.getStyleClass().add("custom-list-view");
 		pauseCombo.getStyleClass().add("custom-combo-box");
 		setupScreenTitleLabel.getStyleClass().add("title-label");

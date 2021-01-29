@@ -90,7 +90,7 @@ public class Model extends Observable {
 		return this.pauseTime;
 	}
 
-	// BooleanProperty helping us to disable the (gobackto-)setupButton when you are working out
+	// BooleanProperty helping us to disable the (gobackto-)setupButton when you are working out by using binding
 	public final BooleanProperty workoutDoneProperty() {
 		if (this.workoutDone == null) {
 			this.workoutDone = new SimpleBooleanProperty(true);
@@ -98,7 +98,7 @@ public class Model extends Observable {
 		return this.workoutDone;
 	}
 
-	// BooleanProperty helping us disabling the (goto-)workoutButton when you havent yet added atleast one exercise
+	// BooleanProperty helping us disabling the (goto-)workoutButton when you havent yet added atleast one exercise by using binding
 	public final BooleanProperty workoutCreatedProperty() {
 		if (this.workoutCreated == null) {
 			this.workoutCreated = new SimpleBooleanProperty(false);

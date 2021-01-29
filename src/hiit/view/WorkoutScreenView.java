@@ -42,6 +42,7 @@ public class WorkoutScreenView implements Observer {
 		final CustomButton timerPlay = new CustomButton("Set done");
 		final CustomButton timerPause = new CustomButton("Pause");
 		final ProgressIndicator pauseIndicator = new ProgressIndicator();
+		
 		pauseIndicator.setMaxHeight(120);
 		pauseIndicator.setMaxWidth(120);
 		pauseIndicator.setMinHeight(120);
@@ -69,7 +70,7 @@ public class WorkoutScreenView implements Observer {
 		
 		ListView<String> workoutListView = new ListView<String>(model.stringEntries);
 		
-		// Adding css controllers
+		// Adding css classes
 		workoutListView.getStyleClass().add("custom-list-view");
 		gridPane.getStyleClass().add("grid-pane");
 		

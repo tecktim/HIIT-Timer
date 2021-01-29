@@ -45,7 +45,7 @@ public class StartScreenView implements Observer {
 		buttonEnd.setOnAction(e -> controller.onClickExit(e));
 		buttonGoToSetupScreen.setOnAction(e -> controller.onClickSetup(e));
 		
-		// Adding css controllers
+		// Adding css classes
 		startScreenTitleLabel.getStyleClass().add("title-label");
 		startScreenGuide.getStyleClass().add("guide-label");
 
