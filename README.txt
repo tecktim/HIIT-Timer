@@ -40,6 +40,10 @@ Kurze Beschreibung, auf welche Weise Aspekte der Software-Ergonomie in die Gesta
 
 Alle Screens sind gleich strukturiert damit der User sich schnell zurechfindet.
 ----------------------------------------------------------------------------------------------------------------------------------------
+Falls die .jar Datei sich nicht öffnen lässt, kann man das Projekt trotzdem in Eclipse ausprobieren, dafür muss 
+eine Konfiguration angelegt werden, die folgende vm-arguments beinhaltet:
+--module-path <path-to-javafx-sdk>\lib --add-modules=javafx.controls
 
+Außerdem sollten die javafx 11 libs im Java Build Path unter Properties hinterlegt sein.
 
 
