@@ -2,6 +2,7 @@ package hiit;
 
 import javafx.scene.control.TextField;
 
+//Custom Text Field Class helping us to globally resize the TextFields
 public class CustomTextField extends TextField {
 
 	private final double MAX_HEIGHT = 60;

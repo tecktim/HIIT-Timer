@@ -20,10 +20,12 @@ public class StartScreenController implements Observer {
 		this.primaryStage = primaryStage;
 	}
 
+	//End Button
 	public void onClickExit(ActionEvent e) {
 		Platform.exit();
 	}
 
+	//SetupButton
 	public void onClickSetup(ActionEvent e) {
 		SetupScreenController setupScreenController = new SetupScreenController(this.primaryStage, this.model);
 		SetupScreenView setupScreenView = new SetupScreenView(this.primaryStage, this.model, setupScreenController);

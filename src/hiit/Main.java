@@ -17,9 +17,11 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
+		
+		//Icon, title and notResizable setten
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("HIIT-Workout-Timer");
+		
 		// <div>Icons made by <a href="https://www.freepik.com"
 		// title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"
 		// title="Flaticon">www.flaticon.com</a></div>

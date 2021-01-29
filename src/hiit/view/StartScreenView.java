@@ -27,6 +27,8 @@ public class StartScreenView implements Observer {
 
 	public StartScreenView(Stage primaryStage, Model model, StartScreenController controller) {
 		this.primaryStage = primaryStage;
+		
+		final GridPane gridPane = new GridPane();
 
 		final CustomButton buttonGoToSetupScreen = new CustomButton("Setup");
 		final Label startScreenTitleLabel = new Label("Getting started");
@@ -37,34 +39,37 @@ public class StartScreenView implements Observer {
 				+ "Step 6: If you are done with your first set, press 'Set Done' to start the pause timer\n\n"
 				+ "Step 7: Continue your next set upon completion of the pause\n\n"
 				+ "Step 8: Repeat Sets 5-7 until you finish your workout\n\n" + "Have fun");
-
 		final CustomButton buttonEnd = new CustomButton("Quit");
+		
+		// Handling end and setup button
 		buttonEnd.setOnAction(e -> controller.onClickExit(e));
 		buttonGoToSetupScreen.setOnAction(e -> controller.onClickSetup(e));
-		final GridPane gridPane = new GridPane();
-
+		
+		// Adding css controllers
 		startScreenTitleLabel.getStyleClass().add("title-label");
 		startScreenGuide.getStyleClass().add("guide-label");
 
+		// Adding columns and rows to our gridPane
 		double colWidth = WIDTH / COLUMN_COUNT;
 		for (int i = 0; i < 9; i++) {
 			ColumnConstraints column = new ColumnConstraints(colWidth, colWidth, colWidth);
 			column.setHalignment(HPos.CENTER);
 			gridPane.getColumnConstraints().add(column);
 		}
-
 		double rowHeight = HEIGHT / ROW_COUNT;
 		for (int i = 0; i < 9; i++) {
 			RowConstraints row = new RowConstraints(rowHeight, rowHeight, rowHeight);
 			gridPane.getRowConstraints().add(row);
 		}
 
+		// Adding every element to the gridPane
 		gridPane.add(startScreenTitleLabel, 0, 0, COLUMN_COUNT, 1);
 		gridPane.add(startScreenGuide, 1, 1, COLUMN_COUNT - 2, ROW_COUNT - 2);
 		gridPane.add(buttonEnd, 0, ROW_COUNT - 1, 3, 1);
 		gridPane.add(buttonGoToSetupScreen, COLUMN_COUNT - 3, ROW_COUNT - 1, 3, 1);
 		gridPane.getStyleClass().add("grid-pane");
 
+		
 		VBox layoutStart = new VBox();
 		layoutStart.getChildren().addAll(gridPane);
 		scene = new Scene(layoutStart, WIDTH, HEIGHT);

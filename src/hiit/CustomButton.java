@@ -2,6 +2,7 @@ package hiit;
 
 import javafx.scene.control.Button;
 
+//Custom Button Class helping us resize the buttons globally
 public class CustomButton extends Button {
 
 	private final double MAX_WIDTH = 200;

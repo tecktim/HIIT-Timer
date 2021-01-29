@@ -26,10 +26,12 @@ public class WorkoutScreenController implements Observer {
 		this.primaryStage = primaryStage;
 	}
 
+	// Exit Button
 	public void onClickExit(ActionEvent e) {
 		Platform.exit();
 	}
 
+	// Setup Button
 	public void onClickSetup(ActionEvent e) {
 
 		SetupScreenController setupScreenController = new SetupScreenController(this.primaryStage, this.model);
@@ -38,6 +40,7 @@ public class WorkoutScreenController implements Observer {
 		setupScreenView.show();
 	}
 
+	// Button to pause or resume the "pause timer"
 	public void onClickPauseTimerAction(ActionEvent e) {
 		CustomButton button = (CustomButton) e.getSource();
 		boolean newValue = !this.model.pauseStop;
@@ -45,6 +48,7 @@ public class WorkoutScreenController implements Observer {
 		button.setText(button.getText().equals("Pause") ? "Resume" : "Pause");
 	}
 
+	// Button to initially start the pause timer, every time a set is done
 	public void onClickStartTimerAction(ActionEvent e, ProgressIndicator pauseIndicator, Button timerPlay,
 			Button timerPause) {
 		Task<Integer> timerTask = this.model.timerTask();
@@ -52,13 +56,16 @@ public class WorkoutScreenController implements Observer {
 		timerPause.setDisable(false);
 		this.model.workoutDoneProperty().set(false);
 		this.model.setPauseStop(false);
+		
+		// Disable SetDone Button when timerTask is running
 		timerTask.setOnRunning((WorkerStateEvent event) -> {
 			timerPlay.disableProperty().bind(timerTask.progressProperty().greaterThanOrEqualTo(100).not());
 		});
 		pauseIndicator.progressProperty().bind(timerTask.progressProperty());
 		thread = new Thread(timerTask);
 		thread.start();
-
+		
+		// To Do on timerTask done
 		timerTask.setOnSucceeded((WorkerStateEvent event) -> {
 			timerPlay.disableProperty().bind(this.model.workoutCreatedProperty().not());
 			pauseIndicator.setVisible(false);

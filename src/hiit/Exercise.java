@@ -1,5 +1,6 @@
 package hiit;
 
+//Class representing an Exercise, contain a name, sets, repetitions.
 public class Exercise {
 
 	private String name;

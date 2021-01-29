@@ -13,6 +13,7 @@ import javafx.concurrent.Task;
 public class Model extends Observable {
 	private static boolean pauseStopThread = false;
 
+	// The 5 second timer is left there for testing purposes
 	public ObservableList<Integer> pauseOptions = FXCollections.observableArrayList(5, 20, 30, 40, 60, 120, 180);
 
 	private Exercise[] exercises = {};
@@ -49,7 +50,9 @@ public class Model extends Observable {
 			this.removeEntry(0);
 		}
 	}
-
+	
+	// Created with the help of the lecture slides
+	// timerTask to handle the pauseTime
 	public Task<Integer> timerTask() {
 		return new Task<Integer>() {
 			protected Integer call() throws Exception {
@@ -67,16 +70,13 @@ public class Model extends Observable {
 						break;
 					}
 					updateProgress(i, (pauseTime * 10));
-					// System.out.println(i);
 				}
 				return i;
 			}
 		};
 	}
-	/*
-	 * //https://stackoverflow.com/questions/12465127/simple-java-countdown
-	 */
 
+	// Boolean to handle pausing and resuming the pauseTimer
 	public void setPauseStop(Boolean pauseStop) {
 		pauseStopThread = pauseStop;
 		this.pauseStop = pauseStopThread;
@@ -90,6 +90,7 @@ public class Model extends Observable {
 		return this.pauseTime;
 	}
 
+	// BooleanProperty helping us to disable the (gobackto-)setupButton when you are working out
 	public final BooleanProperty workoutDoneProperty() {
 		if (this.workoutDone == null) {
 			this.workoutDone = new SimpleBooleanProperty(true);
@@ -97,6 +98,7 @@ public class Model extends Observable {
 		return this.workoutDone;
 	}
 
+	// BooleanProperty helping us disabling the (goto-)workoutButton when you havent yet added atleast one exercise
 	public final BooleanProperty workoutCreatedProperty() {
 		if (this.workoutCreated == null) {
 			this.workoutCreated = new SimpleBooleanProperty(false);

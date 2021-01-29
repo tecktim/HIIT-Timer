@@ -54,44 +54,46 @@ public class WorkoutScreenView implements Observer {
 
 		workoutScreenTitleLabel.getStyleClass().add("title-label");
 
+		// Handling exit and setup button
 		buttonEnd.setOnAction(e -> this.controller.onClickExit(e));
-
 		buttonGoToSetupScreen.setOnAction(e -> this.controller.onClickSetup(e));
+		
+		// Disabling setup button when the workout has been started but not finished yet
 		buttonGoToSetupScreen.disableProperty().bind(this.model.workoutDoneProperty().not());
 
+		// Handling "Set Done" button, starting the timerTask and disabling the button
 		timerPlay.setOnAction(e -> this.controller.onClickStartTimerAction((e), pauseIndicator, timerPlay, timerPause));
-		/*
-		 * gridPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
-		 * 
-		 * @Override public void handle(KeyEvent event) { if(event.getCode() ==
-		 * KeyCode.SPACE) { controller.onClickStartTimerKey((event), pauseIndicator); }
-		 * } });
-		 */
+		
+		// Handling "Pause" and "Resume" button to elongate the pause if wanted
 		timerPause.setOnAction(e -> this.controller.onClickPauseTimerAction(e));
+		
 		ListView<String> workoutListView = new ListView<String>(model.stringEntries);
+		
+		// Adding css controllers
 		workoutListView.getStyleClass().add("custom-list-view");
+		gridPane.getStyleClass().add("grid-pane");
+		
+		// Adding columns and rows to the gridPane
 		double colWidth = WIDTH / 9;
 		for (int i = 0; i < 9; i++) {
 			ColumnConstraints column = new ColumnConstraints(colWidth, colWidth, colWidth);
 			column.setHalignment(HPos.CENTER);
 			gridPane.getColumnConstraints().add(column);
 		}
-
 		double rowHeight = HEIGHT / 9;
 		for (int i = 0; i < 9; i++) {
 			RowConstraints row = new RowConstraints(rowHeight, rowHeight, rowHeight);
 			gridPane.getRowConstraints().add(row);
 		}
 
+		// Adding every element to the gridPane
 		gridPane.add(workoutScreenTitleLabel, 0, 0, 9, 1);
 		gridPane.add(workoutListView, 0, 2, COLUMN_COUNT - 2, 5);
 		gridPane.add(pauseIndicator, COLUMN_COUNT - 2, 5, 2, 2);
 		gridPane.add(timerPlay, COLUMN_COUNT - 2, 2, 2, 1);
 		gridPane.add(timerPause, COLUMN_COUNT - 2, 3, 2, 1);
-
 		gridPane.add(buttonGoToSetupScreen, 0, ROW_COUNT - 1, 3, 1);
 		gridPane.add(buttonEnd, COLUMN_COUNT - 3, ROW_COUNT - 1, 3, 1);
-		gridPane.getStyleClass().add("grid-pane");
 
 		VBox layoutWorkout = new VBox();
 		layoutWorkout.getChildren().addAll(gridPane);
