@@ -1,7 +1,5 @@
 package hiit.controller;
 
-import java.util.Observable;
-import java.util.Observer;
 
 import hiit.model.Model;
 import hiit.view.SetupScreenView;
@@ -9,8 +7,8 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
-@SuppressWarnings("deprecation")
-public class StartScreenController implements Observer {
+
+public class StartScreenController{
 
 	private Model model;
 	private Stage primaryStage;
@@ -33,9 +31,4 @@ public class StartScreenController implements Observer {
 		setupScreenView.show();
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-
-	}
 }

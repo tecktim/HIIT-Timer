@@ -1,7 +1,6 @@
 package hiit.controller;
 
-import java.util.Observable;
-import java.util.Observer;
+
 import hiit.CustomButton;
 import hiit.model.Model;
 import hiit.view.SetupScreenView;
@@ -13,8 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 import javafx.stage.Stage;
 
-@SuppressWarnings("deprecation")
-public class WorkoutScreenController implements Observer {
+public class WorkoutScreenController{
 
 	private Model model;
 	private Stage primaryStage;
@@ -84,9 +82,4 @@ public class WorkoutScreenController implements Observer {
 		this.model.decrementSets();
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-
-	}
 }

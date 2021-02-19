@@ -1,6 +1,6 @@
 package hiit.model;
 
-import java.util.Observable;
+
 import hiit.Exercise;
 
 import javafx.beans.property.BooleanProperty;
@@ -9,8 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 
-@SuppressWarnings("deprecation")
-public class Model extends Observable {
+public class Model{
 	private static boolean pauseStopThread = false;
 
 	// The 5 second timer is left there for testing purposes
@@ -58,6 +57,7 @@ public class Model extends Observable {
 			protected Integer call() throws Exception {
 
 				int i;
+				// * 10 because we had displaying issues with the progressIndicator
 				for (i = 1; i < (pauseTime * 10) + pauseTime; i++) {
 
 					Thread.sleep(100);

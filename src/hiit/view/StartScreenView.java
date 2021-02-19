@@ -1,7 +1,5 @@
 package hiit.view;
 
-import java.util.Observable;
-import java.util.Observer;
 
 import hiit.CustomButton;
 import hiit.controller.StartScreenController;
@@ -15,8 +13,8 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-@SuppressWarnings("deprecation")
-public class StartScreenView implements Observer {
+
+public class StartScreenView{
 	private final double WIDTH = 900;
 	private final double HEIGHT = 900;
 	private final int COLUMN_COUNT = 9;
@@ -81,8 +79,4 @@ public class StartScreenView implements Observer {
 		this.primaryStage.show();
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-
-	}
 }

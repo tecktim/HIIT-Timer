@@ -1,8 +1,5 @@
 package hiit.controller;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import hiit.model.Model;
 import hiit.view.StartScreenView;
 import hiit.view.WorkoutScreenView;
@@ -13,8 +10,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-@SuppressWarnings("deprecation")
-public class SetupScreenController implements Observer {
+public class SetupScreenController{
 
 	private Stage primaryStage;
 	private Model model;
@@ -82,10 +78,5 @@ public class SetupScreenController implements Observer {
 			}
 		};
 	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-
 	}
-}
+
